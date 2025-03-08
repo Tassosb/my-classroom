@@ -1,6 +1,10 @@
 class User < ApplicationRecord
   has_secure_password
+
   has_many :sessions, dependent: :destroy
+  has_many :data_syncs, dependent: :destroy
+  has_many :courses, dependent: :destroy
+  has_many :students, -> { distinct }, through: :courses
 
   normalizes :email_address, with: ->(e) { e.strip.downcase }
 

@@ -1,0 +1,12 @@
+<h1>Courses</h1>
+
+<%= button_to "Sync Data with Google Classroom", data_syncs_path, method: :post %>
+
+<ul>
+  <% @courses.each do |course| %>
+    <li>
+      <%= course.name %>
+      <%= link_to 'Show', course_path(course) %> |
+    </li>
+  <% end %>
+</ul>

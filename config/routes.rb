@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   resource :session
-
   get '/auth/:provider/callback' => 'sessions#omni_auth'
+
+  resources :courses, only: %i[index show]
+  resources :data_syncs, only: :create
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -14,5 +16,5 @@ Rails.application.routes.draw do
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
   # Defines the root path route ("/")
-  # root "posts#index"
+  root "courses#index"
 end
