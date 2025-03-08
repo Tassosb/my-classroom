@@ -1,0 +1,2 @@
+class DataSync < ApplicationRecord
+end
