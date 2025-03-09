@@ -4,10 +4,11 @@ Rails.application.config.middleware.use OmniAuth::Builder do
            Rails.application.credentials.google.client_secret,
            scope: %w[
              email
-             classroom.coursework.students
-             classroom.courses
+             classroom.coursework.students.readonly
+             classroom.courses.readonly
              classroom.rosters.readonly
              classroom.student-submissions.students.readonly
+             classroom.topics.readonly
            ],
            prompt: 'consent'
 end

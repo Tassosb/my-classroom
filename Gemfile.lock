@@ -122,8 +122,8 @@ GEM
       raabro (~> 1.4)
     globalid (1.2.1)
       activesupport (>= 6.1)
-    google-apis-classroom_v1 (0.2.0)
-      google-apis-core (~> 0.1)
+    google-apis-classroom_v1 (0.39.0)
+      google-apis-core (>= 0.15.0, < 2.a)
     google-apis-core (0.16.0)
       addressable (~> 2.5, >= 2.5.1)
       googleauth (~> 1.9)
@@ -455,7 +455,7 @@ DEPENDENCIES
   brakeman
   capybara
   debug
-  google-apis-classroom_v1 (~> 0.2.0)
+  google-apis-classroom_v1
   googleauth
   importmap-rails
   jbuilder

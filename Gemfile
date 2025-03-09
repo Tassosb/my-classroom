@@ -44,7 +44,7 @@ gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-rails_csrf_protection'
 
-gem 'google-apis-classroom_v1', '~> 0.2.0'
+gem 'google-apis-classroom_v1'
 gem 'googleauth'
 
 group :development, :test do

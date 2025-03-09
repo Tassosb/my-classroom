@@ -1,0 +1,2 @@
+class GradeCategory < ApplicationRecord
+end

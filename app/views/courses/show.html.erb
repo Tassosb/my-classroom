@@ -1,0 +1,23 @@
+<h1>
+  <%= @course.name %>
+</h1>
+
+<%= button_to "Sync Data with Google Classroom", data_syncs_path, method: :post %>
+
+<h2>Students</h2>
+<ul>
+  <% @course.students.each do |student| %>
+    <li>
+      <%= student.name %>
+    </li>
+  <% end %>
+</ul>
+
+<h2>Assignments</h2>
+<ul>
+  <% @course.assignments.each do |assignment| %>
+    <li>
+      <%= assignment.name %>
+    </li>
+  <% end %>
+</ul>
