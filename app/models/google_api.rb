@@ -1,4 +1,4 @@
-require 'google/api_client/client_secrets'
+require "google/api_client/client_secrets"
 
 class GoogleAPI
   attr_reader :tokens
@@ -10,7 +10,7 @@ class GoogleAPI
 
   def self.from_omni_auth(omni_auth)
     self.new(
-      access_token: omni_auth[:token], 
+      access_token: omni_auth[:token],
       refresh_token: omni_auth[:refresh_token],
       expires_at: omni_auth[:expires_at]
     )
@@ -29,9 +29,9 @@ class GoogleAPI
 
   def classroom_data
     {
-      courses_attrs: classroom_service.list_courses(teacher_id: 'me').courses.map do |course_data|
+      courses_attrs: classroom_service.list_courses(teacher_id: "me").courses.map do |course_data|
         grade_categories_data = course_data.gradebook_settings.grade_categories || []
-        students_data = classroom_service.list_course_students(course_data.id, fields: 'students/profile').students
+        students_data = classroom_service.list_course_students(course_data.id, fields: "students/profile").students
 
         topics_data = classroom_service.list_course_topics(course_data.id).topic || []
 
@@ -44,7 +44,7 @@ class GoogleAPI
           course_work/work_type
           course_work/state
           course_work/grade_category/id
-        ].join(',')
+        ].join(",")
         assignments_data = classroom_service.list_course_works(course_data.id, fields: assignment_fields).course_work || []
 
         {
@@ -65,7 +65,7 @@ class GoogleAPI
               last_name: student_data.profile.name.family_name
             }
           end,
-          topics_attrs: topics_data.map do |topic_data| 
+          topics_attrs: topics_data.map do |topic_data|
             { google_id: topic_data.topic_id, name: topic_data.name }
           end,
           assignments_attrs: assignments_data.map do |assignment_data|
@@ -75,10 +75,10 @@ class GoogleAPI
               student_submissions/assigned_grade
               student_submissions/user_id
               student_submissions/course_work_type
-            ].join(',')
+            ].join(",")
             assignment_grades_data = classroom_service.list_student_submissions(
-                                              course_data.id, 
-                                              assignment_data.id, 
+                                              course_data.id,
+                                              assignment_data.id,
                                               fields: assignment_grade_fields
                                             )
                                             .student_submissions || []
@@ -115,7 +115,7 @@ class GoogleAPI
   end
 
   def stringify_date(google_date)
-    return '' if google_date.nil?
-    [google_date.year, google_date.month, google_date.day].join('-')
+    return "" if google_date.nil?
+    [ google_date.year, google_date.month, google_date.day ].join("-")
   end
 end

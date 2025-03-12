@@ -5,8 +5,8 @@ class DataSync < ApplicationRecord
     # TODO: Persist the google token on data_syncs instead of grabbing the last user session
     # What if the user starts a data sync then logs out before it finishes?
     user_session = user.sessions.order(:created_at).last
-    raise 'No current session' if user_session.nil?
-    
+    raise "No current session" if user_session.nil?
+
     update!(started_at: Time.zone.now)
     api = GoogleAPI.from_omni_auth(user_session.omni_auth.symbolize_keys!)
     Helper.sync_data!(user, api.classroom_data)
@@ -21,19 +21,19 @@ class DataSync < ApplicationRecord
     def self.sync_data!(user, data)
       ApplicationRecord.transaction do
         user.courses.destroy_all
-  
+
         student_cache = {}
 
         data[:courses_attrs].each do |course_attrs|
           students = course_attrs[:students_attrs].map do |student_attrs|
-            student_cache[student_attrs[:google_id]] || 
+            student_cache[student_attrs[:google_id]] ||
               Student.new(student_attrs.slice(:google_id, :first_name, :last_name))
           end
-  
+
           course = user.courses.create!(course_attrs.slice(:google_id, :name))
-  
+
           course.students = students
-  
+
           course.students.each do |student|
             student_cache[student.google_id] = student
           end
@@ -55,7 +55,7 @@ class DataSync < ApplicationRecord
             grade_category = grade_categories_cache[assignment_attrs[:grade_category_google_id]]
 
             assignment = course.assignments.create!(
-              topic: topic, 
+              topic: topic,
               grade_category: grade_category,
               **assignment_attrs.slice(:google_id, :name, :max_points, :due_on)
             )
@@ -64,7 +64,7 @@ class DataSync < ApplicationRecord
               student = student_cache[assignment_grade_attrs[:student_google_id]]
               student.assignment_grades.build(assignment_grade_attrs.slice(:google_id, :draft_grade, :returned_grade))
             end
-            
+
             assignment.assignment_grades = assignment_grades
           end
         end

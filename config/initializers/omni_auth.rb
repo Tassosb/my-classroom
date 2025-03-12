@@ -1,6 +1,6 @@
 Rails.application.config.middleware.use OmniAuth::Builder do
-  provider :google_oauth2, 
-           Rails.application.credentials.google.client_id, 
+  provider :google_oauth2,
+           Rails.application.credentials.google.client_id,
            Rails.application.credentials.google.client_secret,
            scope: %w[
              email
@@ -10,7 +10,7 @@ Rails.application.config.middleware.use OmniAuth::Builder do
              classroom.student-submissions.students.readonly
              classroom.topics.readonly
            ],
-           prompt: 'consent'
+           prompt: "consent"
 end
 # Sage (STAM): 110499431832195285133
 # Sage (Precal): 110499431832195285133

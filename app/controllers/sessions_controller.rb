@@ -6,9 +6,9 @@ class SessionsController < ApplicationController
   end
 
   def omni_auth
-    auth = request.env['omniauth.auth']
+    auth = request.env["omniauth.auth"]
     user = User.from_omni_auth(auth)
-    
+
     if user.valid?
       start_new_session_for user, auth[:credentials]
       redirect_to after_authentication_url

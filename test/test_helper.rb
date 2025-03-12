@@ -10,6 +10,11 @@ module ActiveSupport
     # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
     fixtures :all
 
-    # Add more helper methods to be used by all tests here...
+    setup do
+      Rails.application.credentials.google = {
+        client_id: "test-client-id",
+        client_secret: "test-client-secret"
+      }
+    end
   end
 end
