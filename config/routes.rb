@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resource :session
-  get '/auth/:provider/callback' => 'sessions#omni_auth'
+  get "/auth/:provider/callback" => "sessions#omni_auth"
 
   resources :courses, only: %i[index show]
   resources :data_syncs, only: :create

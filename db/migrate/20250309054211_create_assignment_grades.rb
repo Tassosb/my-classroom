@@ -8,6 +8,6 @@ class CreateAssignmentGrades < ActiveRecord::Migration[8.0]
       t.references :assignment, foreign_key: true, index: true, null: false
       t.references :student, foreign_key: true, index: true, null: false
     end
-    add_index :assignment_grades, [:student_id, :assignment_id], unique: true
+    add_index :assignment_grades, [ :student_id, :assignment_id ], unique: true
   end
 end

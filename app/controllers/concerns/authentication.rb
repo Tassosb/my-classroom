@@ -40,7 +40,7 @@ module Authentication
 
     def start_new_session_for(user, credentials)
       user.sessions.create!(
-        user_agent: request.user_agent, 
+        user_agent: request.user_agent,
         ip_address: request.remote_ip,
         omni_auth: credentials
       ).tap do |session|
